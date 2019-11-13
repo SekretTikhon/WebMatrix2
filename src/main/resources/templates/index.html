@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        input[type="text"] {
+            width: 20px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="/">
+    <div>
+        N: <input type="text" id="N" name="n"><br>
+        M: <input type="text" id="M" name="m"><br>
+        <button class="js-generate-btn">Generate</button>
+    </div>
+    <div class="matrix_input hide">
+        <table class="matrix">
+        </table>
+        <select name="method">
+            <option>Gauss</option>
+            <option>Mult_I</option>
+            <option>Mult_Random</option>
+            <option>Mult_sincos_4_6</option>
+        </select>
+        <input class="js-go-btn" type="submit" value="Go">
+    </div>
+</form>
+</body>
+<script>
+    $(function () {
+        $('.js-generate-btn').click(function(e) {
+            e.preventDefault();
+
+            let N = $('#N')[0].value,
+                M = $('#M')[0].value,
+                matrix = $('.matrix');
+
+            $('.matrix_input').removeClass('hide');
+
+            matrix.empty();
+            for (var i = 0; i < N; i++) {
+                let row = $('<tr></tr>');
+                for (var j = 0; j < M; j++) {
+                    row.append('<td><input type="text" name="' + i + '_' + j + '"></td>');
+                }
+                matrix.append(row);
+            }
+        });
+    });
+</script>
+</html>
